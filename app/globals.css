@@ -1,26 +1,225 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0a0c0f;
+  --color-panel: #13171c;
+  --color-panel-2: #1a2027;
+  --color-line: #262d36;
+  --color-fg: #f2f4f6;
+  --color-muted: #98a2ae;
+  --color-brand: #ff4d1c;
+  --color-brand-2: #ff7a3d;
+  --color-gold: #ffc53d;
+  --color-lime: #c6ff3d;
+  --color-ok: #34d399;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-oswald), Impact, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 28px;
+  }
+}
+
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding-inline: 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--color-brand);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-brand-2);
+}
+.btn-ghost {
+  border: 1px solid var(--color-line);
+  color: var(--color-fg);
+  background: transparent;
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--color-fg);
+}
+.btn-light {
+  background: #fff;
+  color: #0a0c0f;
+}
+.btn-sm {
+  height: 36px;
+  padding-inline: 14px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding-inline: 14px;
+  border-radius: 10px;
+  background: var(--color-ink);
+  border: 1px solid var(--color-line);
+  color: var(--color-fg);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus {
+  border-color: var(--color-brand);
+}
+.input::placeholder {
+  color: #5d6773;
+}
+textarea.input {
+  height: auto;
+  padding-block: 12px;
+}
+select.input {
+  appearance: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding-inline: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip:hover {
+  color: var(--color-fg);
+  border-color: var(--color-muted);
+}
+.chip-on {
+  background: var(--color-fg);
+  border-color: var(--color-fg);
+  color: var(--color-ink);
+}
+.chip-on:hover {
+  color: var(--color-ink);
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.35s ease both;
+}
+
+@keyframes floaty {
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .rise,
+  .floaty {
+    animation: none;
+  }
 }
